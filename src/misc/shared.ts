@@ -1,4 +1,4 @@
-import type { ChatCompletionRequestMessage } from 'openai';
+import type OpenAI from 'openai';
 import { get } from 'svelte/store';
 import { defaultOpenAiSettings, OpenAiModel, type OpenAiSettings } from './openai';
 import {
@@ -14,7 +14,7 @@ import { goto } from '$app/navigation';
 import { chatStore, settingsStore } from './stores';
 import { PUBLIC_DISABLE_TRACKING } from '$env/static/public';
 
-export interface ChatMessage extends ChatCompletionRequestMessage {
+export interface ChatMessage extends OpenAI.Chat.CreateChatCompletionRequestMessage {
 	id?: string;
 	messages?: ChatMessage[];
 	isSelected?: boolean;
@@ -24,7 +24,7 @@ export interface ChatMessage extends ChatCompletionRequestMessage {
 export interface Chat {
 	title: string;
 	settings: OpenAiSettings;
-	contextMessage: ChatCompletionRequestMessage;
+	contextMessage: OpenAI.Chat.CreateChatCompletionRequestMessage;
 	messages: ChatMessage[];
 	created: Date;
 
@@ -53,7 +53,7 @@ export function createNewChat(template?: {
 	context?: string;
 	title?: string;
 	settings?: OpenAiSettings;
-	messages?: ChatCompletionRequestMessage[];
+	messages?: OpenAI.Chat.CreateChatCompletionRequestMessage[];
 }) {
 	const settings = { ...(template?.settings || defaultOpenAiSettings) };
 	const { defaultModel } = get(settingsStore);
@@ -100,7 +100,7 @@ export async function suggestChatTitle(chat: Chat, openAiApiKey: string): Promis
 				role: m.role,
 				content: m.content,
 				name: m.name
-			} as ChatCompletionRequestMessage)
+			} as OpenAI.Chat.CreateChatCompletionRequestMessage)
 	);
 
 	const response = await fetch('/api/suggest-title', {

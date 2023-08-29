@@ -55,7 +55,7 @@
 		"gpt3-tokenizer": "^1.1.5",
 		"highlight.js": "^11.8.0",
 		"javascript-time-ago": "^2.5.9",
-		"openai": "^3.3.0",
+		"openai": "^4.3.1",
 		"random-word-slugs": "^0.1.7",
 		"snarkdown": "^2.0.0",
 		"sse.js": "^0.6.1",

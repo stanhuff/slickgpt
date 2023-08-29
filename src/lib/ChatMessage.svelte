@@ -74,7 +74,7 @@
 
 	<!-- Message Content -->
 	<div>
-		{@html snarkdown(message.content)}
+		{@html snarkdown(message.content ?? "")}
 	</div>
 </div>
 
